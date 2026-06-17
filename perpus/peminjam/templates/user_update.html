@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %} SIPUSTAKA - Edit User {% endblock %}
+
+{% block content %}
+    <header class="mb-6">
+        <div class="flex items-center gap-2 text-xs text-slate-400 mb-1">
+            <a href="{% url 'user_list' %}" class="hover:text-blue-600 flex items-center transition">
+                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Kelola User
+            </a>
+        </div>
+        <h1 class="text-2xl font-bold text-slate-900">Edit User</h1>
+    </header>
+
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 max-w-4xl">
+        <form method="POST" class="space-y-5">
+            {% csrf_token %}
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-xs font-semibold text-slate-500">Nama Lengkap</label>
+                    <input type="text" name="nama" value="{{ form.nama.value|default:user_data.nama }}" required class="w-full bg-slate-50 border border-slate-200/80 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition" placeholder="Masukkan nama lengkap">
+                </div>
+
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-xs font-semibold text-slate-500">Kelas</label>
+                    <input type="text" name="kelas" value="{{ form.kelas.value|default:user_data.kelas }}" required class="w-full bg-slate-50 border border-slate-200/80 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition" placeholder="Contoh: XI IPA 2">
+                </div>
+
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-xs font-semibold text-slate-500">NIS (Nomor Induk Siswa)</label>
+                    <input type="text" name="nis" value="{{ form.nis.value|default:user_data.nis }}" required class="w-full bg-slate-50 border border-slate-200/80 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition font-mono" placeholder="Masukkan NIS siswa">
+                </div>
+
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-xs font-semibold text-slate-500">Ubah Status</label>
+                    <div class="relative">
+                        <select name="status" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition appearance-none cursor-pointer">
+                            <option value="Aktif" {% if user_data.status == "Aktif" or not user_data.status %}selected{% endif %}>Aktif</option>
+                            <option value="Tidak Aktif" {% if user_data.status == "Tidak Aktif" %}selected{% endif %}>Tidak Aktif</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-1.5 md:col-span-2">
+                    <label class="text-xs font-semibold text-slate-500">Aksi / Log Catatan</label>
+                    <input type="text" name="aksi" value="{{ form.aksi.value|default:user_data.aksi|default:'Update Data' }}" required class="w-full bg-slate-50 border border-slate-200/80 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition" placeholder="Alasan atau log perubahan data">
+                </div>
+
+            </div>
+
+            <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
+                <a href="{% url 'user_list' %}" class="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-medium text-sm rounded-xl transition">
+                    Batal
+                </a>
+                <button type="submit" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-xl shadow-md shadow-blue-600/10 transition">
+                    Perbarui User
+                </button>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    SIPUSTAKA - {% if buku.id %}Edit Buku{% else %}Tambah Buku{% endif %}
+{% endblock %}
+
+{% block content %}
+    <header class="mb-6 flex items-center gap-3">
+        <a href="{% url 'buku_list' %}" class="text-slate-400 hover:text-slate-600 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+        </a>
+        <div>
+            <p class="text-xs text-slate-400 mb-0.5">Kelola Buku</p>
+            <h1 class="text-xl font-bold text-slate-900">
+                {% if buku.id %}Edit Buku{% else %}Tambah Buku{% endif %}
+            </h1>
+        </div>
+    </header>
+
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 max-w-4xl">
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-3">
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-500">Judul Buku</label>
+                    <input type="text" name="judul" value="{{ buku.judul|default:'' }}" required placeholder="Contoh: Laskar Pelangi"
+                           class="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                </div>
+                
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-500">Pengarang</label>
+                    <input type="text" name="pengarang" value="{{ buku.pengarang|default:'' }}" required placeholder="Contoh: Andrea Hirata"
+                           class="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                </div>
+                
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-500">Kategori</label>
+                    <input type="text" name="kategori" value="{{ buku.kategori|default:'' }}" required placeholder="Contoh: Novel"
+                           class="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                </div>
+                
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-500">Penerbit</label>
+                    <input type="text" name="penerbit" value="{{ buku.penerbit|default:'' }}" required placeholder="Contoh: Bentang Pustaka"
+                           class="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                </div>
+                
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-500">Tahun Terbit</label>
+                    <input type="number" name="tahun_terbit" value="{{ buku.tahun_terbit|default:'' }}" required placeholder="Contoh: 2005"
+                           class="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-500">Stok</label>
+                    <input type="number" name="stok" value="{{ buku.stok|default:'' }}" min="0" required placeholder="Contoh: 5"
+                           class="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-500">ISBN</label>
+                    <input type="text" name="isbn" value="{{ buku.isbn|default:'' }}" placeholder="Contoh: 978-979-3062-79-2"
+                           class="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                </div>
+                
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-500">Rak / Lokasi</label>
+                    <input type="text" name="lokasi_rak" value="{{ buku.lokasi_rak|default:'' }}" required placeholder="Contoh: Rak A-01"
+                           class="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                </div>
+
+            </div>
+            
+            <div class="flex flex-col gap-1">
+                <label class="text-xs font-semibold text-slate-500">Deskripsi</label>
+                <textarea name="deskripsi" rows="3" placeholder="Deskripsi singkat isi buku..."
+                          class="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition resize-none">{{ buku.deskripsi|default:'' }}</textarea>
+            </div>
+            
+            <div class="flex justify-end gap-2.5 pt-4 border-t border-slate-100">
+                <a href="{% url 'buku_list' %}" 
+                   class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold text-xs rounded-xl transition">
+                    Batal
+                </a>
+                <button type="submit" 
+                        class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl shadow-sm transition">
+                    {% if buku.id %}Perbarui Buku{% else %}Simpan Buku{% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

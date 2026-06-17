@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %} SIPUSTAKA - Daftar User {% endblock %}
+
+{% block content %}
+    <header class="flex justify-between items-center mb-6">
+        <div>
+            <p class="text-sm text-slate-400 font-medium mb-0.5">Data siswa yang bisa meminjam buku.</p>
+            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">User</h1>
+        </div>
+        <a href="{% url 'user_create' %}" class="bg-[#1d4ed8] hover:bg-blue-700 text-white font-medium text-sm px-5 py-2.5 rounded-xl shadow-sm transition flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"></path>
+            </svg>
+            Tambah User
+        </a>
+    </header>
+
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 overflow-x-auto">
+        <table class="w-full text-left border-collapse text-sm">
+            <thead>
+                <tr class="border-b border-slate-100 text-xs font-semibold text-slate-400">
+                    <th class="py-3 px-6 w-[8%]">ID</th>
+                    <th class="py-3 px-6 w-[22%]">Nama</th>
+                    <th class="py-3 px-6 w-[15%]">Kelas</th>
+                    <th class="py-3 px-6 w-[15%]">NIS</th>
+                    <th class="py-3 px-6 w-[15%]">Status</th>
+                    <th class="py-3 px-6 w-[25%]">Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-50 text-slate-600">
+                {% for user_siswa in data %}
+                <tr class="hover:bg-slate-50/50 transition">
+                    <td class="py-4 px-6 text-slate-900 font-medium">{{ user_siswa.id }}</td>
+                    
+                    <td class="py-4 px-6 text-slate-700 font-medium">{{ user_siswa.nama }}</td>
+                    
+                    <td class="py-4 px-6 text-slate-500">{{ user_siswa.kelas }}</td>
+                    
+                    <td class="py-4 px-6 text-slate-500 font-mono">{{ user_siswa.nis }}</td>
+                    
+                    <td class="py-4 px-6">
+                        <span class="inline-flex items-center justify-center text-xs font-semibold px-3 py-1 rounded-full 
+                            {% if user_siswa.status == 'Aktif' %}
+                                text-emerald-600 bg-emerald-50
+                            {% else %}
+                                text-rose-600 bg-rose-50
+                            {% endif %}">
+                            {{ user_siswa.status|default:"Aktif" }}
+                        </span>
+                    </td>
+                    
+                    <td class="py-4 px-4 text-center whitespace-nowrap space-x-1">
+                        <a href="{% url 'user_detail' user_siswa.id %}" class="inline-block text-xs font-medium text-slate-500 hover:bg-slate-100 px-4 py-1.5 rounded-full transition">
+                            Detail
+                        </a>
+                        <a href="{% url 'user_update' user_siswa.id %}" class="inline-block text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-full transition shadow-sm">
+                            Edit
+                        </a>
+                        <a href="{% url 'user_delete' user_siswa.id %}" class="inline-block text-xs font-medium bg-red-500 hover:bg-red-600 text-white px-4 py-1.5 rounded-full transition shadow-sm">
+                            Hapus
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="py-8 text-center text-sm text-slate-400">Belum ada data siswa terdaftar.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
