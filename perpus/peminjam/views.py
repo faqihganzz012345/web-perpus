@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db import connection, IntegrityError
+from django.conf import settings
+print(settings.DATABASES)
 
 def dictfetchall(cursor):
     """Mengubah semua hasil query menjadi list of dictionaries (Aman Huruf Kecil)."""
