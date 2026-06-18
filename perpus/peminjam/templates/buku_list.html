@@ -1,89 +1,92 @@
-{% extends 'base.html' %} {% block title %} Daftar Buku {% endblock %} {% block
-content %}
-<header class="flex justify-between items-center mb-6">
-  <div>
-    <p class="text-xs text-slate-500 mb-1">Kelola data buku SIPUSTAKA.</p>
-    <h1 class="text-2xl font-bold text-slate-900">Daftar Buku</h1>
+{% extends 'base.html' %} 
 
-    {% if keyword %}
-    <h3 class="text-sm mt-1 text-slate-600">
-      Hasil pencarian : <b class="text-blue-600">"{{ keyword }}"</b>
-    </h3>
-    {% endif %}
-  </div>
+{% block title %} Daftar Buku {% endblock %} 
 
-  <a
-    href="{% url 'buku_create' %}"
-    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-6 py-2.5 rounded-full shadow-lg shadow-blue-600/20 transition flex items-center gap-1"
-  >
-    <span class="font-bold">+</span> Tambah Buku
-  </a>
-</header>
+{% block content %}
+    <header class="flex justify-between items-center mb-6">
+    <div>
+        <p class="text-xs text-slate-500 mb-1">Kelola data buku SIPUSTAKA.</p>
+        <h1 class="text-2xl font-bold text-slate-900">Daftar Buku</h1>
 
-<div
-  class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 overflow-x-auto"
->
-  <table class="w-full text-left border-collapse text-sm">
-    <thead>
-      <tr
-        class="border-b border-slate-100 text-xs font-semibold text-slate-500"
-      >
-        <th class="py-3 px-4 w-[5%]">ID</th>
-        <th class="py-3 px-4 w-[20%]">Judul</th>
-        <th class="py-3 px-4 w-[15%]">Pengarang</th>
-        <th class="py-3 px-4 w-[10%]">Kategori</th>
-        <th class="py-3 px-4 w-[22%]">Penerbit</th>
-        <th class="py-3 px-4 w-[8%]">Tahun_terbit</th>
-        <th class="py-3 px-4 w-[10%]">lokasi_Rak</th>
-        <th class="py-3 px-4 w-[5%]">Stok</th>
-        <th class="py-3 px-4 w-[15%] text-center">Aksi</th>
-      </tr>
-    </thead>
-    <tbody class="divide-y divide-slate-50 text-slate-700">
-      {% for buku in data %}
-      <tr class="hover:bg-slate-50/50 transition">
-        <td class="py-4 px-4">{{ buku.id }}</td>
-        <td class="py-4 px-4 font-semibold text-slate-900">{{ buku.judul }}</td>
-        <td class="py-4 px-4">{{ buku.pengarang }}</td>
-        <td class="py-4 px-4">{{ buku.kategori }}</td>
-        <td class="py-4 px-4">{{ buku.penerbit }}</td>
-        <td class="py-4 px-4">{{ buku.tahun_terbit }}</td>
-        <td class="py-4 px-4 text-slate-500">{{ buku.lokasi_rak }}</td>
-        <td class="py-4 px-4">{{ buku.stok }}</td>
+        {% if keyword %}
+        <h3 class="text-sm mt-1 text-slate-600">
+        Hasil pencarian : <b class="text-blue-600">"{{ keyword }}"</b>
+        </h3>
+        {% endif %}
+    </div>
 
-        <td class="py-4 px-4 text-center whitespace-nowrap space-x-1">
-          {% if buku.id %}
-          <a
-            href="{% url 'buku_detail' buku.id %}"
-            class="inline-block text-xs font-medium text-slate-500 hover:bg-slate-100 px-4 py-1.5 rounded-full transition"
-          >
-            Detail
-          </a>
-          <a
-            href="{% url 'buku_update' buku.id %}"
-            class="inline-block text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-full transition shadow-sm"
-          >
-            Edit
-          </a>
-          <a
-            href="{% url 'buku_delete' buku.id %}"
-            class="inline-block text-xs font-medium bg-red-500 hover:bg-red-600 text-white px-4 py-1.5 rounded-full transition shadow-sm"
-          >
-            Hapus
-          </a>
-          {% else %}
-          <span class="text-red-500 text-xs">ID kosong</span>
-          {% endif %}
-        </td>
-      </tr>
-      {% empty %}
-      <tr>
-        <td colspan="9" class="py-8 text-center text-slate-400 italic">
-          Belum ada data buku yang tersedia.
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+    <a
+        href="{% url 'buku_create' %}"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-6 py-2.5 rounded-full shadow-lg shadow-blue-600/20 transition flex items-center gap-1"
+    >
+        <span class="font-bold">+</span> Tambah Buku
+    </a>
+    </header>
+
+    <div
+    class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 overflow-x-auto"
+    >
+    <table class="w-full text-left border-collapse text-sm">
+        <thead>
+        <tr
+            class="border-b border-slate-100 text-xs font-semibold text-slate-500"
+        >
+            <th class="py-3 px-4 w-[5%]">ID</th>
+            <th class="py-3 px-4 w-[20%]">Judul</th>
+            <th class="py-3 px-4 w-[15%]">Pengarang</th>
+            <th class="py-3 px-4 w-[10%]">Kategori</th>
+            <th class="py-3 px-4 w-[22%]">Penerbit</th>
+            <th class="py-3 px-4 w-[8%]">Tahun_terbit</th>
+            <th class="py-3 px-4 w-[10%]">lokasi_Rak</th>
+            <th class="py-3 px-4 w-[5%]">Stok</th>
+            <th class="py-3 px-4 w-[15%] text-center">Aksi</th>
+        </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-50 text-slate-700">
+        {% for buku in data %}
+        <tr class="hover:bg-slate-50/50 transition">
+            <td class="py-4 px-4">{{ buku.id }}</td>
+            <td class="py-4 px-4 font-semibold text-slate-900">{{ buku.judul }}</td>
+            <td class="py-4 px-4">{{ buku.pengarang }}</td>
+            <td class="py-4 px-4">{{ buku.kategori }}</td>
+            <td class="py-4 px-4">{{ buku.penerbit }}</td>
+            <td class="py-4 px-4">{{ buku.tahun_terbit }}</td>
+            <td class="py-4 px-4 text-slate-500">{{ buku.lokasi_rak }}</td>
+            <td class="py-4 px-4">{{ buku.stok }}</td>
+
+            <td class="py-4 px-4 text-center whitespace-nowrap space-x-1">
+            {% if buku.id %}
+            <a
+                href="{% url 'buku_detail' buku.id %}"
+                class="inline-block text-xs font-medium text-slate-500 hover:bg-slate-100 px-4 py-1.5 rounded-full transition"
+            >
+                Detail
+            </a>
+            <a
+                href="{% url 'buku_update' buku.id %}"
+                class="inline-block text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-full transition shadow-sm"
+            >
+                Edit
+            </a>
+            <a
+                href="{% url 'buku_delete' buku.id %}"
+                class="inline-block text-xs font-medium bg-red-500 hover:bg-red-600 text-white px-4 py-1.5 rounded-full transition shadow-sm"
+            >
+                Hapus
+            </a>
+            {% else %}
+            <span class="text-red-500 text-xs">ID kosong</span>
+            {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="9" class="py-8 text-center text-slate-400 italic">
+            Belum ada data buku yang tersedia.
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
 {% endblock %}

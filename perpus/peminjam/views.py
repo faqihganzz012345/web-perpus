@@ -60,6 +60,10 @@ def buku_list(request):
                 'lokasi_rak': row.get('rak', ''),
             })
 
+    print("DATA BUKU:")
+    for item in data_buku:
+     print(item)
+
     return render(request, 'buku_list.html', {
         'keyword': search_text,
         'data': data_buku,
