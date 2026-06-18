@@ -28,12 +28,6 @@
                 </div>
 
                 <nav class="space-y-2">
-    <a href="{% url 'buku_list' %}?page=dashboard" 
-       class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition {% if request.GET.page == 'dashboard' %} text-white bg-[#1a2333] {% else %} text-slate-400 hover:bg-slate-800 hover:text-white {% endif %}">
-        <svg class="w-4 h-4 {% if request.GET.page == 'dashboard' %} text-white {% else %} text-slate-500 {% endif %}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-        Dashboard
-    </a>
-    
     <a href="{% url 'buku_list' %}?page=buku" 
        class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition {% if request.GET.page == 'buku' or not request.GET.page %} text-white bg-[#1a2333] {% else %} text-slate-400 hover:bg-slate-800 hover:text-white {% endif %}">
         <svg class="w-4 h-4 {% if request.GET.page == 'buku' or not request.GET.page %} text-white {% else %} text-slate-500 {% endif %}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
