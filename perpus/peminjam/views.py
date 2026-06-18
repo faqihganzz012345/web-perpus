@@ -43,7 +43,6 @@ def buku_list(request):
                 ORDER BY id DESC
             """)
             search_text = "Katalog Buku"
-        
         raw_data = dictfetchall(cursor)
         
         data_buku = []
