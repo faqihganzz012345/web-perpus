@@ -15,5 +15,4 @@ urlpatterns = [
     path('user/detail/<int:id>/', views.user_detail, name='user_detail'),
     path('user/ubah/<int:id>/', views.user_update, name='user_update'),
     path('user/hapus/<int:id>/', views.user_delete, name='user_delete'),
-
 ]
